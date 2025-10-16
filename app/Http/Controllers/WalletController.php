@@ -35,7 +35,7 @@ class WalletController extends Controller
         }
 
         if (Auth::user()->wallet->balance < $request->amount) {
-            return response(['message' => 'Insufficient balance'], 403);
+            return response(['message' => 'Insufficient balance'], 400);
         }
 
         $receiverWallet = Wallet::where('user_id', $request->receiver_id)->first();

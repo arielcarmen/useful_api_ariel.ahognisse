@@ -22,7 +22,7 @@ class WalletTopupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => 'required|numeric|gt:0|lt:10000'
+            'amount' => 'required|numeric|gt:0'
         ];
     }
 }
