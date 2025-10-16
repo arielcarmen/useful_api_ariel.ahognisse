@@ -32,4 +32,10 @@ class ProductController extends Controller
 
         return response($data, 201);
     }
+
+    public function index(){
+        $products = Product::where('user_id', Auth::id())->get()->map->only(['id', 'name', 'price', 'stock', 'min_stock']);
+
+        return response($products, 200);
+    }
 }
