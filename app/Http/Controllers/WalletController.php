@@ -67,6 +67,7 @@ class WalletController extends Controller
     }
 
     public function topup(WalletTopupRequest $request){
+        $request->validated();
         if ($request->amount > 10000) {
             return response(['message' => 'You can\'t topup more than 10000'], 400);
         }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShortLinkController;
 use App\Http\Controllers\WalletController;
 use App\Http\Middleware\CheckModuleActive;
@@ -28,7 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::middleware('module:3')->group(function () {
-        
+        Route::post('/products', [ProductController::class, 'store']);
+        Route::get('/products', [ProductController::class, 'index']);
     });
 });
 
