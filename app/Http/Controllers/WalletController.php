@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
+    public function transactions()
+    {
+        $transactions = Transaction::where('sender_id', Auth::id())->orWhere('receiver_id', Auth::id())->get()->map->only(['id', 'sender_id', 'receiver_id', 'amount', 'status', 'created_at']);
+
+        return response($transactions, 200);
+    }
+
     public function wallet()
     {
         $wallet = Auth::user()->wallet;
