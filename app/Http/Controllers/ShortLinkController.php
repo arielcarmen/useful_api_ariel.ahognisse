@@ -20,9 +20,17 @@ class ShortLinkController extends Controller
     {
         $request->validated();
 
+        $random_code = '';
+        if (!$request->has('custom_code') ||  empty($request->custom_code)) {
+            do {
+                $random_code = fake()->regexify('[A-Za-z0-9_-]{10}');
+                $existing_link = ShortLink::where('code', $random_code)->first();
+            } while ($existing_link);
+        }
+
         $shortlink = ShortLink::create([
             'original_url' => $request->original_url,
-            'code' => $request->custom_code ?? fake()->regexify('[A-Za-z0-9_]{10}'),
+            'code' => $request->custom_code ?? $random_code,
             'user_id' => Auth::id(),
         ]);
 
@@ -64,7 +72,7 @@ class ShortLinkController extends Controller
         }
 
         if ($shortlink->user_id !== Auth::id()) {
-            return response('You can\'t delete this link',403);
+            return response('You can\'t delete this link', 403);
         }
 
         $shortlink->delete();

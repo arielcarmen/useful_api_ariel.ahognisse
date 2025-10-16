@@ -23,7 +23,7 @@ class UrlShortenRequest extends FormRequest
     {
         return [
             'original_url' => 'required|url:http,https',
-            'custom_code' => 'nullable|string|max:10|unique:short_links,code|regex:/^[A-Za-z0-9_]+$/'
+            'custom_code' => 'nullable|string|max:10|unique:short_links,code|regex:/^[A-Za-z0-9_-]+$/'
         ];
     }
 }
