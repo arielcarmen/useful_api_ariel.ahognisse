@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('module:2')->group(function () {
         Route::get('/wallet', [WalletController::class, 'wallet']);
+        Route::post('/wallet/transfer', [WalletController::class, 'transfert']);
+        Route::post('/wallet/topup', [WalletController::class, 'topup']);
     });
 });
 
