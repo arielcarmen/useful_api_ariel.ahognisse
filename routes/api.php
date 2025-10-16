@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Middleware\CheckModuleActive;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
