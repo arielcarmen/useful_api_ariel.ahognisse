@@ -21,7 +21,7 @@ class ModuleController extends Controller
         $module = Module::where('id', $id)->first();
 
         if (!$module) {
-            return response('Module not fount', 404);
+            return response(['message' => 'Module not fount'], 404);
         }
 
         $user_module = UserModule::where([['user_id', Auth::id()], ['module_id', $id]])->first();
@@ -47,7 +47,7 @@ class ModuleController extends Controller
         $module = Module::where('id', $id)->first();
 
         if (!$module) {
-            return response('Module not fount', 404);
+            return response(['message' => 'Module not fount'], 404);
         }
 
         $user_module = UserModule::where([['user_id', Auth::id()], ['module_id', $id]])->first();

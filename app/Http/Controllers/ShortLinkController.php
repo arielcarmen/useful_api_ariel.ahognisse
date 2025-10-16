@@ -50,12 +50,12 @@ class ShortLinkController extends Controller
         $shortlink = ShortLink::where('code', $code)->first();
 
         if (!$shortlink) {
-            return response('Link not found', 404);
+            return response(['message' => 'Link not fount'], 404);
         }
         $shortlink = ShortLink::where('code', $code)->first();
 
         if (!$shortlink) {
-            return response('Link not found', 404);
+            return response(['message' => 'Link not found'], 404);
         }
 
         $shortlink->increment('clicks');
@@ -68,11 +68,11 @@ class ShortLinkController extends Controller
         $shortlink = ShortLink::find($id);
 
         if (!$shortlink) {
-            return response('Link not found', 404);
+            return response(['message' => 'Link not found'], 404);
         }
 
         if ($shortlink->user_id !== Auth::id()) {
-            return response('You can\'t delete this link', 403);
+            return response(['message' => 'You can\'t delete this link'], 403);
         }
 
         $shortlink->delete();
