@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShortLink extends Model
 {
-    //
+    protected $fillable = [
+        'code',
+        'original_url',
+        'user_id',
+        'clicks'
+    ];
 }

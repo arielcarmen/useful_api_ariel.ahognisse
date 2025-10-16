@@ -14,8 +14,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/modules/{id}/deactivate', [ModuleController::class, 'deactivate']);
 
     Route::middleware('module:1')->group(function() {
-        // Route::post();
         Route::get('/links', [ShortLinkController::class, 'index']);
+        Route::post('/shorten', [ShortLinkController::class, 'shorten']);
+        Route::delete('/links/{id}', [ShortLinkController::class, 'delete']);
     });
 });
 

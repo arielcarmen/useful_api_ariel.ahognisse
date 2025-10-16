@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('original_url');
             $table->string('code');
-            $table->integer('clicks');
+            $table->integer('clicks')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
