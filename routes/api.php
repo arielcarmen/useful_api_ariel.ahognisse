@@ -13,7 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/modules/{id}/activate', [ModuleController::class, 'activate']);
     Route::post('/modules/{id}/deactivate', [ModuleController::class, 'deactivate']);
 
-    Route::middleware('module:1')->group(function() {
+    Route::middleware('module:1')->group(function () {
         Route::get('/links', [ShortLinkController::class, 'index']);
         Route::post('/shorten', [ShortLinkController::class, 'shorten']);
         Route::delete('/links/{id}', [ShortLinkController::class, 'delete']);
@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/s/{code}', [ShortLinkController::class, 'show']);

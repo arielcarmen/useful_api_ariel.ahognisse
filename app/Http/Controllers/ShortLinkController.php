@@ -37,7 +37,24 @@ class ShortLinkController extends Controller
         return response($data, 201);
     }
 
-    public function show(Request $request) {}
+    public function show(Request $request, string $code)
+    {
+        $shortlink = ShortLink::where('code', $code)->first();
 
-    public function delete(Request $request) {}
+        if (!$shortlink) {
+            return response('Link not found', 404);
+        }$shortlink = ShortLink::where('code', $code)->first();
+
+        if (!$shortlink) {
+            return response('Link not found', 404);
+        }
+
+        $shortlink->increment('clicks');
+
+        return redirect($shortlink->original_url, 302);
+    }
+
+    public function delete(Request $request, int $id) {
+        
+    }
 }
