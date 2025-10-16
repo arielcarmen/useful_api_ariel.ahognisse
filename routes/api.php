@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ShortLinkController;
+use App\Http\Controllers\WalletController;
 use App\Http\Middleware\CheckModuleActive;
 use App\Models\Module;
 use Illuminate\Http\Request;
@@ -17,6 +18,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/links', [ShortLinkController::class, 'index']);
         Route::post('/shorten', [ShortLinkController::class, 'shorten']);
         Route::delete('/links/{id}', [ShortLinkController::class, 'delete']);
+    });
+
+    Route::middleware('module:2')->group(function () {
+        Route::get('/wallet', [WalletController::class, 'wallet']);
     });
 });
 
