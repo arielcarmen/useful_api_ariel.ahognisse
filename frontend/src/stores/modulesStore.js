@@ -42,7 +42,15 @@ export const useModulesStore = defineStore('modules', () => {
         }
     }
 
-    return { modules, loading, updating, getAll, activateModule, deactivateModule }
+    const toggleActive = async (moduleId, active)=>{
+        if (active === true) {
+            deactivateModule(moduleId)
+        } else {
+            activateModule(moduleId)
+        }
+    }
+
+    return { modules, loading, updating, getAll, activateModule, deactivateModule, toggleActive }
 }, {
     persist: true,
 })

@@ -1,9 +1,12 @@
 <template>
-<Sidebar/>
+    <div class="flex flex-row h-screen">
+        <Sidebar :modules="moduleStore.modules" />
 
-<div class=" h-full w-full">
-    <Module v-for="(module, index) in moduleStore.modules" :key="index" :module="module"/>
-</div>
+        <div class=" h-full w-full">
+            <Module v-for="(module, index) in moduleStore.modules" :key="index" :module="module"
+                @toggle="moduleStore.toggleActive(module.id, module.active)" />
+        </div>
+    </div>
 </template>
 
 <script setup>
