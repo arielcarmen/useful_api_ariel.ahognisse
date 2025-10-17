@@ -14,6 +14,8 @@ export const useModulesStore = defineStore('modules', () => {
         try {
             const response = await apiService.get("/modules")
             modules.value = response.data
+            console.log(response.data);
+            
         } catch (error) {
             toast.error('Cannot load modules')
             console.error(error.message);

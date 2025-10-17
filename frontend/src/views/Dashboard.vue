@@ -11,6 +11,7 @@
 <script setup>
 import Sidebar from '@/components/Sidebar.vue';
 import { useModulesStore } from '@/stores/modulesStore';
+import { onMounted } from 'vue';
 
 const moduleStore = useModulesStore()
 
