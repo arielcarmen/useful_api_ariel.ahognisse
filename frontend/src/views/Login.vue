@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { authStore } from '@/stores/auth';
+import { authStore } from '@/stores/authStore';
 
 const store = authStore()
 </script>
