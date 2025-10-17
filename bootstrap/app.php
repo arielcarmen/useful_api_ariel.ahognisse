@@ -16,6 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'module' => CheckModuleActive::class
         ]);
+
+        $middleware->validateCsrfTokens(
+            [
+                '/api/*'
+            ]
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
