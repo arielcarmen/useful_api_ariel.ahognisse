@@ -1,20 +1,22 @@
 import axios from "axios";
+import { useToast } from "vue-toastification";
 
+const toast = useToast()
 const apiService = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL
 })
 
-apiService.interceptors.request.use(config => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-})
+// apiService.interceptors.request.use(config => {
+//     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+// })
 
-apiService.interceptors.response.use((response) => {
+apiService.interceptors.response.use(response => {
     return response
 }, error => {
     if (error.response && error.response.status === 401) {
-        router.push("/")
+        toast.error('Unauthenticated !')
+        router.push("/login")
     }
-
     throw error
 })
 
