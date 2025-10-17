@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import apiService from '@/services/api'
 import { useToast } from 'vue-toastification'
 
-export const useCounterStore = defineStore('modules', () => {
+export const useModulesStore = defineStore('modules', () => {
     const toast = useToast()
 
     const modules = ref([])
@@ -41,4 +41,6 @@ export const useCounterStore = defineStore('modules', () => {
     }
 
     return { modules, loading, updating, getAll, activateModule, deactivateModule }
+}, {
+    persist: true,
 })

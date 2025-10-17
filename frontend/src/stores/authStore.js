@@ -99,4 +99,6 @@ export const authStore = defineStore('auth', () => {
     }
 
     return { register, login, isRegistering, isLoggingIn, registerErrors, loginErrors, loginUser, registerUser, canRegister, canLogin }
-})
+}, {
+    persist: true,
+},)
