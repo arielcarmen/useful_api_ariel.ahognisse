@@ -28,8 +28,11 @@
                         {{ error }}
                     </span>
                 </div>
-                <button :disabled="!store.canRegister" class="px-2 py-1 text-white bg-blue-500 rounded-lg disabled:bg-gray-600" 
-                    @click.prevent="store.register">Register</button>
+                <button :disabled="!store.canRegister"
+                    class="px-2 py-1 text-white bg-blue-500 rounded-lg disabled:bg-gray-600"
+                    @click.prevent="store.register"><p v-if="store.isRegistering">...</p><p v-else>Register</p></button>
+                <p class="py-2 text-center text-black text-sm">Or login <router-link class="text-blue-500"
+                            to="/login">here</router-link></p>
             </form>
         </div>
     </div>

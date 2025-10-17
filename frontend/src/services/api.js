@@ -13,7 +13,7 @@ const apiService = axios.create({
 apiService.interceptors.response.use(response => {
     return response
 }, error => {
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 401 && !error.response.data.includes('credentials')) {
         toast.error('Unauthenticated !')
         router.push("/login")
     }

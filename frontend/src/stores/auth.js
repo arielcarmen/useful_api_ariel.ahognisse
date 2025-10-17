@@ -32,9 +32,9 @@ export const authStore = defineStore('auth', () => {
 
     const isRegistering = ref(false)
 
-    const canRegister = computed(() => registerUser.value.name.trim().length >= 0 && registerUser.value.password.trim().length > 8 && registerUser.value.email.trim().length > 0)
+    const canRegister = computed(() => registerUser.value.name.trim().length >= 0 && registerUser.value.password.trim().length >= 8 && registerUser.value.email.trim().length > 0 && isRegistering.value === false)
 
-    const canLogin = computed(() => loginUser.value.password.trim().length >= 8 && loginUser.value.email.trim().length > 0)
+    const canLogin = computed(() => loginUser.value.password.trim().length >= 8 && loginUser.value.email.trim().length > 0 && isLoggingIn.value === false)
 
     const login = async () => {
         try {
@@ -51,6 +51,9 @@ export const authStore = defineStore('auth', () => {
                 'password': ''
             }
         } catch (error) {
+            if (error instanceof AxiosError && error.response.status === 401 && error.response.data.includes('credentials')) {
+                loginErrors.value.email = error.response?.data
+            }
             if (error instanceof AxiosError && error.response?.status === 422) {
                 loginErrors.value.email = error.response?.data.errors.email,
                     loginErrors.value.password = error.response?.data.errors.password
