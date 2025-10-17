@@ -12,7 +12,7 @@ export const useModulesStore = defineStore('modules', () => {
 
     const getAll = async () => {
         try {
-            const response = await apiService.get("/modules")
+            const response = await apiService.get("/user_modules")
             modules.value = response.data
             console.log(response.data);
             

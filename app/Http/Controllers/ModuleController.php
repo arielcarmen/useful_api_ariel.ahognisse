@@ -16,6 +16,22 @@ class ModuleController extends Controller
         return response($modules->map->only(['id', 'name', 'description']), 200);
     }
 
+    public function userModules(Request $request)
+    {
+        $modules = Module::all();
+
+        foreach ($modules as $module) {
+            $state = UserModule::where([['user_id', Auth::id()], ['module_id', $module->id]])->first();
+            if ($state && $state->active === 1) {
+                $module->active = true;
+            } else {
+                $module->active = false;
+            }
+        }
+
+        return response($modules->map->only(['id', 'name', 'description', 'active']), 200);
+    }
+
     public function activate(Request $request, int $id)
     {
         $module = Module::where('id', $id)->first();

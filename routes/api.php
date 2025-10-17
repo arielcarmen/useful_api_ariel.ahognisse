@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/modules', [ModuleController::class, 'index']);
+    Route::get('/user_modules', [ModuleController::class, 'userModules']);
     Route::post('/modules/{id}/activate', [ModuleController::class, 'activate']);
     Route::post('/modules/{id}/deactivate', [ModuleController::class, 'deactivate']);
 
