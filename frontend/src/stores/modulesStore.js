@@ -14,8 +14,7 @@ export const useModulesStore = defineStore('modules', () => {
         try {
             const response = await apiService.get("/user_modules")
             modules.value = response.data
-            console.log(response.data);
-            
+
         } catch (error) {
             toast.error('Cannot load modules')
             console.error(error.message);
@@ -24,7 +23,7 @@ export const useModulesStore = defineStore('modules', () => {
 
     const activateModule = async (moduleId) => {
         try {
-            const response = await apiService.get(`/modules/${moduleId}/activate`)
+            const response = await apiService.post(`/modules/${moduleId}/activate`)
             toast.success(response.data)
         } catch (error) {
             toast.error('Cannot activate modules')
@@ -34,7 +33,7 @@ export const useModulesStore = defineStore('modules', () => {
 
     const deactivateModule = async (moduleId) => {
         try {
-            const response = await apiService.get(`/modules/${moduleId}/deactivate`)
+            const response = await apiService.post(`/modules/${moduleId}/deactivate`)
             toast.success(response.data)
         } catch (error) {
             toast.error('Cannot deactivate modules')
@@ -42,12 +41,14 @@ export const useModulesStore = defineStore('modules', () => {
         }
     }
 
-    const toggleActive = async (moduleId, active)=>{
+    const toggleActive = async (moduleId, active) => {
+
         if (active === true) {
-            deactivateModule(moduleId)
+            await deactivateModule(moduleId)
         } else {
-            activateModule(moduleId)
+            await activateModule(moduleId)
         }
+        getAll()
     }
 
     return { modules, loading, updating, getAll, activateModule, deactivateModule, toggleActive }
